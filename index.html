@@ -1,0 +1,105 @@
+﻿<!doctype html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8"/>
+ 
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+ 
+   <title>楚天佳</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
+    <audio autoplay="autoplay" loop="loop" preload="auto" src="assets/music/CoverLiver .mp3">
+	</audio>
+</head>
+
+<body>
+<div class="vi">
+    <div class="sidebar">
+        <div class="header">
+            <h1>楚天佳</h1>
+            <div class="quote">
+                <p class="quote-text animate-init"><b>行止无定，随遇而安，</b></p>
+                <p class="quote-text animate-init">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>心安乐处，便是身安乐处。</b></p>
+                <p class="quote-author animate-init">
+                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                —— <strong>《天龙八部》</strong>
+                </p>
+            </div>
+        </div>
+        <div class="menu">
+            <a href="https://github.com/LOVETJR" class="animate-init"><b>GitHub</b></a>
+            <a href="http://blog.csdn.net/LLLCSDN_001" class="animate-init"><b>CSDN</b></a>
+			&nbsp;&nbsp;
+            <a href="http://myloveweb.top/blog" class="animate-init"><b>Blog</b></a>
+            <a href="http://weibo.com/5889272592" class="animate-init"><b>WeiBo</b></a>
+            
+            
+        </div>
+        <div class="location">
+            <i class="location-icon"></i>
+            <span class="location-text animate-init">ShannXi - China</span>
+        </div>
+        <div class="relocating">
+            Navigating to: <span class="relocate-location"></span>...
+        </div>
+    </div>
+
+    <div class="content">
+        <span class="close">close</span>
+    </div>
+</div>
+<script type="text/javascript" src="assets/vendors/jquery/index.js"></script>
+<script>
+    $(document).ready(function () {
+        var delay = 1;
+        var DELAY_STEP = 200;
+        var animationOptions = { opacity: 1, top: 0};
+
+        $('h1').animate(animationOptions).promise()
+                .pipe(animateMain)
+                .pipe(animateLocationIcon);
+
+        function animateMain() {
+            var dfd = $.Deferred();
+            var els = $('.animate-init');
+            var size = els.size();
+
+            els.each(function (index, el) {
+                delay++;
+                $(el).delay(index * DELAY_STEP)
+                        .animate(animationOptions);
+                (size - 1 === index) && dfd.resolve();
+            });
+            return dfd.promise();
+        }
+
+        function animateLocationIcon() {
+            $('.location-icon').delay(delay * DELAY_STEP).animate({
+                opacity: 1,
+                top: 0
+            }).promise().done(animationQuote);
+        }
+
+        function animationQuote() {}
+
+        $(document.body).on('keydown', function (event) {
+            // Press 'b' key
+            if (event.which === 66) {
+                $('.relocate-location').text('Bookmark Page');
+                $('.relocating').css('opacity', 1);
+
+                window.setTimeout(function () {
+                    window.location.href = '/bookmarks.html';
+                }, 1000);
+            }
+        });
+    });
+</script>
+</body>
+</html>
